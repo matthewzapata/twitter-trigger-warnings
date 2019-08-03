@@ -1,9 +1,8 @@
 # Twitter Trigger Warnings
-This project's goal is to create a model that can determine if a movie or TV show has a scene of self harm in it.
+This project's goal is to create a model that can determine if a movie has a scene of self harm in it. The model will classify a movie as True or False in regards to it having a self harm scene based off of Tweets.
 
-The data sources for this project were Twitter, IMDB, and Tumblr:
-[Twitter](https://www.twitter.com)
-[IMDB](https://www.imdb.com/chart/moviemeter?ref_=nv_mv_mpm)
-[Tumblr](https://istheresuicideinit.tumblr.com/)
+The data sources for this project were [Twitter](https://www.twitter.com), [IMDB](https://www.imdb.com/chart/moviemeter?ref_=nv_mv_mpm), and [Tumblr](https://istheresuicideinit.tumblr.com/). Data was obtained from these sources using BeautifulSoup and Selenium. Specifically, BeatifulSoup was used to scrape IMDB and Tumblr, while Selenium was used for Twitter due to it being able to handle infinite scrolling. Tweets were obtained by searching with the keywords "movie name" and "trigger".
 
-Data was obtained from these sources using BeautifulSoup and Selenium. Specifically, BeatifulSoup was used to scrape IMDB and Tumblr, while Selenium was used for Twitter due to it being able to handle infinite scrolling.
+Exploratory data analysis revealed that some words showed up more frequently in one class than the other, but what was really revealing was looking at bigrams. Bigrams such as "need warning", "feel like", and "self harm" were the top bigrams for the class with a self harm scene. Top bigrams for the other class were "mobile game", "gun head", "smell like".
+
+Multiple models were created and evaluated as well as different features. For features, I used word counts, tfidf values, and each of those looking at bigrams. For classification algorithms, I used logistic regression, decision tree, random forest, k-neareset neighbors, xgboost, and multinomial naive bayes. I performed cross validation to determine hyperparameters using GridSearch and RandomizedSearch. I adjusted decision thresholds if needed due to the model unproportionally favoring one class over the other. I then tallied up the predictions by movie to reach the "final prediction". Overall, the best accuracy I obtained was 63% by using bigram counts with a logistic regression model and no threshold adjustment.
